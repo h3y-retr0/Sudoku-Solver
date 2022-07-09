@@ -40,7 +40,18 @@ def find_zero(board):
                 return [r, c]
     return []
 
-find_zero(default_board)
+
+def is_valid(board, row, col, value):
+    for i in board[0]:
+        if i == value:
+            return False
+        else:
+            return True
+
+
+check = is_valid(default_board, 0, 1)
+print(check)
+
 def solve(board):
     return
 
