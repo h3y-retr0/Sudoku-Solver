@@ -29,8 +29,18 @@ def print_board(board):
         if i_row == 8:
             print('------------------------')
 
-print_board(default_board)
+# print_board(default_board)
 
+def find_zero(board):
+    # Returns the first 0 position as an array [row, column]
+    # If there is no 0, returns an empty list
+    for r in range(len(board)):
+        for c in range(len(board[r])):
+            if board[r][c] == 0:
+                return [r, c]
+    return []
+
+find_zero(default_board)
 def solve(board):
     return
 
