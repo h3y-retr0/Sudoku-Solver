@@ -67,5 +67,21 @@ def is_valid(board, row, col, value):
     return True
 
 def solve(board):
+
+    # Base Case
+    nxt_position = find_zero(board)
+    if nxt_position == []:
+        return board
+    
+    # Recursion
+    
+    if find_zero(board) is not None:
+        for try_val in range(1, 10):
+            attempt = is_valid(board, r, c, try_val)
+            if attempt = false:
+                continue
+            else: 
+                return
+
     return
 
