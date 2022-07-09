@@ -42,15 +42,29 @@ def find_zero(board):
 
 
 def is_valid(board, row, col, value):
-    for i in board[0]:
+
+    #Row Check
+    for i in board[row]:
         if i == value:
             return False
-        else:
-            return True
 
+    #Col Check
 
-check = is_valid(default_board, 0, 1)
-print(check)
+    for j in range(len(board)):
+        if value == board[j][col]:
+            return False
+    # 3x3 single grid check
+
+    r = (row - (row % 3))
+    c = (col - (col % 3))
+
+    for i in range(r, r + 3):
+        for j in range(c, c + 3):
+            if value == board[i][j]:
+                return False
+
+    # Everything Ok.
+    return True
 
 def solve(board):
     return
