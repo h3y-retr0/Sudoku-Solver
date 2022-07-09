@@ -1,14 +1,14 @@
 
 
-default_board = [[5, 3, 0, 0, 7, 0, 0, 0, 0],
-                 [6, 0, 0, 1, 9, 5, 0, 0, 0],
-                 [0, 9, 8, 0, 0, 0, 0, 6, 0],
-                 [8, 0, 0, 0, 6, 0, 0, 0, 3],
-                 [4, 0, 0, 8, 0, 3, 0, 0, 1],
-                 [7, 0, 0, 0, 2, 0, 0, 0, 6],
-                 [0, 6, 0, 0, 0, 0, 2, 8, 0],
-                 [0, 0, 0, 4, 1, 9, 0, 0, 5],
-                 [0, 0, 0, 0, 8, 0, 0, 7, 9]]
+board = [[5, 3, 0, 0, 7, 0, 0, 0, 0],
+        [6, 0, 0, 1, 9, 5, 0, 0, 0],
+        [0, 9, 8, 0, 0, 0, 0, 6, 0],
+        [8, 0, 0, 0, 6, 0, 0, 0, 3],
+        [4, 0, 0, 8, 0, 3, 0, 0, 1],
+        [7, 0, 0, 0, 2, 0, 0, 0, 6],
+        [0, 6, 0, 0, 0, 0, 2, 8, 0],
+        [0, 0, 0, 4, 1, 9, 0, 0, 5],
+        [0, 0, 0, 0, 8, 0, 0, 7, 9]]
 
 
 def print_board(board):
@@ -29,7 +29,17 @@ def print_board(board):
         if i_row == 8:
             print('------------------------')
 
-# print_board(default_board)
+
+def check_user_board(board):
+    num_row = len(board)
+    num_col = len(board[0])
+
+    if num_row == 9 and num_col == 9:
+        return True
+    else:
+        print("Enter a valid board please")
+        return False
+
 
 def find_zero(board):
     # Returns the first 0 position as an array [row, column]
@@ -74,14 +84,36 @@ def solve(board):
         return board
     
     # Recursion
-    
-    if find_zero(board) is not None:
-        for try_val in range(1, 10):
-            attempt = is_valid(board, r, c, try_val)
-            if attempt = false:
-                continue
-            else: 
-                return
 
-    return
+    for i in range(1, 10):
+        if is_valid(board, nxt_position[0], nxt_position[1], i):
+            board[nxt_position[0]][nxt_position[1]] = i
+            
+            solution = solve(board)
+            if solution is not None:
+                return solution
+
+    # Backtrack:
+
+    board[nxt_position[0]][nxt_position[1]] = 0
+    return None
+
+
+userInput = input('Press enter to start the program: ')
+
+if userInput == "":
+    print_board(board)
+    check = input('Press enter to solve this sudoku: ')
+    if check == "":
+        if solve(board):
+            print("")
+            print("Solution: ")
+            print("")
+            print_board(solve(board))
+            print("")
+        else:
+            print_board(board)
+            print("No solution")            
+else:
+    exit
 
