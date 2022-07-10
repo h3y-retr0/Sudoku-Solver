@@ -10,6 +10,16 @@ board = [[5, 3, 0, 0, 7, 0, 0, 0, 0],
          [0, 0, 0, 4, 1, 9, 0, 0, 5],
          [0, 0, 0, 0, 8, 0, 0, 7, 9]]
 
+# board = [[0, 8, 0, 0, 0, 0, 0, 0, 0],
+#          [0, 0, 0, 0, 2, 1, 8, 7, 0],
+#          [2, 0, 0, 3, 0, 0, 0, 5, 9],
+#          [0, 0, 4, 0, 0, 9, 0, 2, 0],
+#          [0, 7, 0, 2, 1, 8, 4, 0, 6],
+#          [9, 0, 0, 0, 0, 3, 7, 0, 0],
+#          [0, 0, 0, 0, 0, 0, 0, 0, 0],
+#          [6, 9, 0, 4, 0, 0, 0, 0, 0],
+#          [0, 4, 8, 1, 0, 7, 0, 0, 0]]
+
 
 def print_board(board):
     for i_row, row in enumerate(board):
@@ -80,22 +90,26 @@ def solve(board):
 
     # Base Case
     nxt_position = find_zero(board)
+
     if nxt_position == []:
         return board
     
     # Recursion
+    row = nxt_position[0]
+    col = nxt_position[1]
 
     for i in range(1, 10):
-        if is_valid(board, nxt_position[0], nxt_position[1], i):
-            board[nxt_position[0]][nxt_position[1]] = i
-            
+        if is_valid(board, row, col, i):
+            board[row][col] = i
             solution = solve(board)
+
             if solution is not None:
                 return solution
 
     # Backtrack:
 
-    board[nxt_position[0]][nxt_position[1]] = 0
+    board[row][col] = 0
+    
     # See the recursion process:
     # print_board(board)
     return None
